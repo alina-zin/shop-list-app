@@ -64,6 +64,36 @@ function App() {
     )
   }
 
+  function remove(id) {
+    let status = 0;
+    fetch(URL + 'delete.php', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        id: id
+      })
+    })
+    .then(res => {
+      status = parseInt(res.status);
+      return res.json();
+    })
+    .then(
+      (res) => {
+        if (status === 200) {
+          const updatedList = items.filter((item) => item.id !== id);
+          setItems(updatedList);
+        } else {
+          alert(res.error);
+        }
+      }, (error) => {
+        alert(error);
+      }
+    )
+  }
+
   return (
     <div className='container'>
       <h2>Shopping list</h2>
@@ -78,7 +108,7 @@ function App() {
       </form>
       <ol>
         {items.map(item => (
-          <li key={item.id}>{item.description} - {item.amount} pc.<a onClick={() => delete(item.id)} href="#">Delete</a></li>
+          <li key={item.id}>{item.description} - {item.amount} pc.<a onClick={() => remove(item.id)} href="#">Delete</a></li>
         ))}
       </ol>
     </div>
