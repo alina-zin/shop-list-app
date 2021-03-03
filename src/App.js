@@ -100,9 +100,9 @@ function App() {
       <form onSubmit={add}>
         <div>
           <label>Item: </label>
-          <input type="text" value={item} onChange={e => setItem(e.target.value)} />
+          <input placeholder="What to buy?" type="text" value={item} onChange={e => setItem(e.target.value)} />
           <label>Amount: </label>
-          <input type="number" value={amount} onChange={e => setAmount(e.target.value)}/>
+          <input placeholder="How many?" type="number" value={amount} onChange={e => setAmount(e.target.value)}/>
           <button>Add</button>
         </div>
       </form>
